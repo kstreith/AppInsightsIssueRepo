@@ -4,23 +4,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestAppInsightsPerformance.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    //[ApiController]
     public class ValuesController : ControllerBase
     {
         private DataClient _dataClient;
+        private CacheDataClient _cacheDataClient;
 
-        public ValuesController(DataClient dataClient)
+        public ValuesController(DataClient dataClient, CacheDataClient cacheDataClient)
         {
             _dataClient = dataClient;
+            _cacheDataClient = cacheDataClient;
         }
 
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<string>> Get()
+        public async Task<string> Get()
         {
             var firstData = await _dataClient.GetTestData();
-            var secondData = await _dataClient.GetTestData2();
+            var secondData = await _cacheDataClient.GetAll();
             var r = new Random();
             var firstValue = firstData[r.Next(firstData.Count)];
             var secondValue = secondData[r.Next(secondData.Count)];
