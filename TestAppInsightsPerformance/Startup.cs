@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using CacheManager.Core;
-using Hangfire;
-using Hangfire.Dashboard;
-using Hangfire.SqlServer;
+//using Hangfire;
+//using Hangfire.Dashboard;
+//using Hangfire.SqlServer;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -52,23 +52,23 @@ namespace TestAppInsightsPerformance
             });
 
             services.AddTransient<QueueController, QueueController>();
-            services.AddHangfire(config =>
+            /*services.AddHangfire(config =>
             {
                 config.UseSqlServerStorage(dbConnection,
                     new SqlServerStorageOptions()
                     {
                         CommandTimeout = TimeSpan.FromSeconds(commandTimeout)
                     });
-            });
+            });*/
         }
 
-        public class AllowAll : IDashboardAuthorizationFilter
+        /*public class AllowAll : IDashboardAuthorizationFilter
         {
             public bool Authorize(DashboardContext context)
             {
                 return true;
             }
-        }
+        }*/
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider provider)
@@ -82,14 +82,14 @@ namespace TestAppInsightsPerformance
             {
                 app.UseHsts();
             }*/
-            app.UseHangfireServer(new BackgroundJobServerOptions
+            /*app.UseHangfireServer(new BackgroundJobServerOptions
             {
                 WorkerCount = 2
             });
             app.UseHangfireDashboard(options: new DashboardOptions
             {
                 Authorization = new List<IDashboardAuthorizationFilter> { new AllowAll() }
-            });
+            });*/
             //app.UseHttpsRedirection();
             app.UseMvc();
         }

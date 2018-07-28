@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Hangfire;
+//using Hangfire;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -12,13 +12,13 @@ namespace TestAppInsightsPerformance.Controllers
     //[ApiController]
     public class QueueController : ControllerBase
     {
-        private DataClient _dataClient;
-        private TelemetryClient _client;
+        //private DataClient _dataClient;
+        //private TelemetryClient _client;
 
-        public QueueController(DataClient dataClient, TelemetryClient client)
+        public QueueController(/*DataClient dataClient, TelemetryClient client*/)
         {
-            _dataClient = dataClient;
-            _client = client;
+            /*_dataClient = dataClient;
+            _client = client;*/
         }
 
         // GET api/values
@@ -26,10 +26,11 @@ namespace TestAppInsightsPerformance.Controllers
         public async Task<string> Get()
         {
             var val = Guid.NewGuid().ToString();
-            BackgroundJob.Enqueue(() => DoWork(val));
+            //BackgroundJob.Enqueue(() => DoWork(val));
             return await Task.FromResult($"Queued-{val}");
         }
 
+        /*
         public async Task DoWork(string guid)
         {
             using (var op = _client.StartOperation<RequestTelemetry>("Background: QueueController-DoWork"))
@@ -41,6 +42,6 @@ namespace TestAppInsightsPerformance.Controllers
                 op.Telemetry.ResponseCode = "200";
                 _client.StopOperation(op);
             }
-        }
+        }*/
     }
 }
