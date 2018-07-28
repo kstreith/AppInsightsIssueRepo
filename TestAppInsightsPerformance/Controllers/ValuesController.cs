@@ -9,12 +9,12 @@ namespace TestAppInsightsPerformance.Controllers
     public class ValuesController : ControllerBase
     {
         private DataClient _dataClient;
-        private CacheDataClient _cacheDataClient;
+        //private CacheDataClient _cacheDataClient;
 
-        public ValuesController(DataClient dataClient, CacheDataClient cacheDataClient)
+        public ValuesController(DataClient dataClient/*, CacheDataClient cacheDataClient*/)
         {
             _dataClient = dataClient;
-            _cacheDataClient = cacheDataClient;
+            //_cacheDataClient = cacheDataClient;
         }
 
         // GET api/values
@@ -22,11 +22,12 @@ namespace TestAppInsightsPerformance.Controllers
         public async Task<string> Get()
         {
             var firstData = await _dataClient.GetTestData();
-            var secondData = await _cacheDataClient.GetAll();
+            //var secondData = await _cacheDataClient.GetAll();
             var r = new Random();
             var firstValue = firstData[r.Next(firstData.Count)];
-            var secondValue = secondData[r.Next(secondData.Count)];
-            return $"{firstValue.Name}-{firstValue.Rating}-{secondValue.Description}-{secondValue.Location}-{Guid.NewGuid()}";
+            //var secondValue = secondData[r.Next(secondData.Count)];
+            //return $"{firstValue.Name}-{firstValue.Rating}-{secondValue.Description}-{secondValue.Location}-{Guid.NewGuid()}";
+            return $"{firstValue.Name}-{firstValue.Rating}-{Guid.NewGuid()}";
         }
     }
 }

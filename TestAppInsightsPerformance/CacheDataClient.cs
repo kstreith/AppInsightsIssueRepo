@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CacheManager.Core;
-using CacheManager.Core.Internal;
+//using CacheManager.Core;
+//using CacheManager.Core.Internal;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 
 namespace TestAppInsightsPerformance
 {
+   /*
     public class CacheDataClient
     {
         private readonly ICacheManager<IList<WorkLocation>> _cache;
@@ -17,7 +18,7 @@ namespace TestAppInsightsPerformance
         private readonly string _refresherKey = "refresher";
         private readonly TimeSpan _timeout;
 
-        public CacheDataClient(DataClient dataClient/*, ILogger log*/, ICacheManager<IList<WorkLocation>> cache)
+        public CacheDataClient(DataClient dataClient, ICacheManager<IList<WorkLocation>> cache)
         {
             _dataClient = dataClient;
             //_logger = log;
@@ -92,5 +93,5 @@ namespace TestAppInsightsPerformance
                 _cache.Add(refresher);
             }
         }
-    }
+    } */
 }

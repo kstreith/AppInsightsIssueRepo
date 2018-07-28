@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CacheManager.Core;
+//using CacheManager.Core;
 //using Hangfire;
 //using Hangfire.Dashboard;
 //using Hangfire.SqlServer;
@@ -32,14 +32,16 @@ namespace TestAppInsightsPerformance
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
             services.AddCacheManagerConfiguration(Configuration, cfg =>
             {
                 //cfg.WithMicrosoftLogging(services);
             });
             services.AddCacheManager();
+            */
             services.Configure<ApplicationInsightsServiceOptions>(Configuration.GetSection("ApplicationInsights"));
             services.AddSingleton(p => new DataClient());
-            services.AddSingleton<CacheDataClient, CacheDataClient>();
+            //services.AddSingleton<CacheDataClient, CacheDataClient>();
             var dbConnection = Configuration["Hangfire:DbConnection"];
             var commandTimeout = Double.Parse(Configuration["Hangfire:CommandTimeout"]);
             services.AddMvc(); //.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
